@@ -1,3 +1,6 @@
+//Program Created by Jermaine Lara
+//11/2/17
+//Program adds, searches and prints and deletes different types of media (video games, music and movies)
 #include <iostream>
 #include <vector>
 #include "Media.h"
@@ -14,6 +17,7 @@ void addMovies(vector<Media *> & media);
 void searchMedia(vector<Media *> & media);
 void deleteMedia(vector<Media *> & media);
 
+//Main loop
 int main () {
 	vector<Media *> media;
 	char command[81];
@@ -35,6 +39,7 @@ int main () {
 	} while(strcmp(command, "QUIT") != 0); 
 }
 
+//Add media method allows user to pick which type of media they would like to add
 void addMedia(vector<Media *> & media) {
 	char mediaType[81];
 	cout << "Enter Media Type (VideoGames, Music, Movies)" << endl;
@@ -53,6 +58,7 @@ void addMedia(vector<Media *> & media) {
 	}
 }
 
+//Adds videogames by prompting fields and having the user input them
 void addVideoGames(vector<Media *> & media) {
 	VideoGames *videoGames =  new VideoGames;
 	char input[81];
@@ -76,6 +82,7 @@ void addVideoGames(vector<Media *> & media) {
 	media.push_back(videoGames);
 }
 
+//Adds music by prompting fields and having the user input them
 void addMusic(vector<Media *> & media) {
     Music *music = new Music;
     char input[81];
@@ -103,6 +110,7 @@ void addMusic(vector<Media *> & media) {
 	media.push_back(music);
 }
 
+//Adds movies by prompting fields and having the user input them
 void addMovies(vector<Media *> & media) {
        Movies *movies = new Movies;
        char input[81];
@@ -129,12 +137,14 @@ void addMovies(vector<Media *> & media) {
 	movies->setRating(new string(input));
 	media.push_back(movies);
 }
-	
+
+//First prompts user how they would like to search
 void searchMedia(vector<Media *> & media) {
 	char input[81];
 	int year;
 	cout << "Would you like to search by Title or by Year?" << endl;
 	cin >> input;
+	//By title
 	if(strcmp(input, "Title") == 0) {
 		cout << "Enter Title" << endl;
 		cin >> input;
@@ -145,11 +155,13 @@ void searchMedia(vector<Media *> & media) {
 			}
 		}
 	}
+	//By year
 	else if (strcmp(input, "Year") == 0) {
 		cout << "Enter Year" << endl;
 		cin >> year;
 		for (vector<Media *>::iterator it = media.begin() ; it != media.end(); ++it) { 
 			if ((*it)->getYear() == year) {
+				//Print method in the .cpp files of respective media types
 				(*it)->print();
 				cout << "------------------------------------------------------------------------" << endl;
 			}
@@ -157,11 +169,13 @@ void searchMedia(vector<Media *> & media) {
 	}
 }
 
+//Method similar to search but deletes instead.
 void deleteMedia(vector<Media *> & media) {
 	char input[81];
 	int year;
 	cout << "Would you like to search Media to delete by Title or by Year?" << endl;
 	cin >> input;
+	//By title
 	if(strcmp(input, "Title") == 0) {
 		cout << "Enter Title" << endl;
 		cin >> input;
@@ -179,6 +193,7 @@ void deleteMedia(vector<Media *> & media) {
 			}
 		}
 	}
+	//By year
 	else if (strcmp(input, "Year") == 0) {
 		cout << "Enter Year" << endl;
 		cin >> year;
